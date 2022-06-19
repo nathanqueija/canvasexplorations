@@ -1,5 +1,6 @@
 (ns components.shape.views
-  (:require [applied-science.js-interop :as j]))
+  (:require [applied-science.js-interop :as j]
+            [components.canvas.context :as canvas.context]))
 
 (defmulti shape* :shape-type)
 
@@ -17,5 +18,6 @@
   (.fill ctx))
 
 (defn base
-  [shape opts]
-  (shape* shape opts))
+  [shape]
+  (let [react-context (canvas.context/use-canvas)]
+    [shape* shape react-context]))
